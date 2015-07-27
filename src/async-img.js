@@ -27,6 +27,7 @@
 
             self.bind(options.events);
             self.on();
+            self.update();
         },
         update: function (reload) {
             if (true === reload || !self.items) {
