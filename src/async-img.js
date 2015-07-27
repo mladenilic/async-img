@@ -3,11 +3,16 @@
 
     var options = {
         hidden: false,
+        offset: {
+            x: 0,
+            y: 0
+        },
+        callbacks: {},
         events: {}
     };
     var isWithinBoundingRect = function ($elem) {
         var rect = $elem[0].getBoundingClientRect();
-        return rect.bottom > 0 && rect.top < $window.height() && rect.left > 0 && rect.right < $window.width(); 
+        return rect.top < $window.height() && rect.bottom > 0 && rect.left < $window.width() && rect.right > 0; 
     }
 
     var isVisible = function ($elem) {
