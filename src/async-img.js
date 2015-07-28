@@ -23,10 +23,6 @@
         return !!($elem[0].offsetWidth * $elem[0].offsetHeight);
     }
 
-    var reloadItems = function () {
-        self.items = $(self.selector);
-    }
-
     return {
         init: function (selector, params) {
             self = this;
@@ -41,11 +37,7 @@
             self.update();
         },
         update: function (reload) {
-            if (true === reload || !self.items) {
-                reloadItems();
-            }
-
-            self.items.each(function () {
+            $(self.selector).each(function () {
                 $elem = $(this);
 
                 if (!$elem.data('src')) {
@@ -72,7 +64,7 @@
         },
         bind: function (event) {
             $(event.target).on(event.type, function () {
-                self.update(true);
+                self.update();
             });
         }
     };
