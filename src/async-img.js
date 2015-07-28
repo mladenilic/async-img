@@ -12,7 +12,10 @@
     };
     var isWithinBoundingRect = function ($elem) {
         var rect = $elem[0].getBoundingClientRect();
-        return rect.top < $window.height() && rect.bottom > 0 && rect.left < $window.width() && rect.right > 0; 
+        return rect.top < $window.height() - options.offset.y &&
+               rect.bottom > 0 &&
+               rect.left < $window.width() - options.offset.x &&
+               rect.right > 0; 
     }
 
     var isVisible = function ($elem) {
