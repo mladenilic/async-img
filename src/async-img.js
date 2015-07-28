@@ -15,7 +15,7 @@
         return rect.top < $window.height() - options.offset.y &&
                rect.bottom > 0 &&
                rect.left < $window.width() - options.offset.x &&
-               rect.right > 0; 
+               rect.right > 0;
     }
 
     var isVisible = function ($elem) {
@@ -54,7 +54,7 @@
                     $elem.load(function () {
                         $(this).data('loaded', true);
 
-                        if (options.callbacks.load) {  
+                        if (options.callbacks.load) {
                             options.callbacks.load($elem);
                         }
                     }).error(function () {

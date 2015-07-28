@@ -5,3 +5,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 ### Added
 - Change log file
+- Editor config file
