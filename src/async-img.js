@@ -48,20 +48,20 @@
             self.items.each(function () {
                 $elem = $(this);
 
-                if (true === $elem.data('loaded') || !$elem.data('src')) {
+                if (!$elem.data('src')) {
                     return true;
                 }
 
                 if (isWithinBoundingRect($elem) || (options.hidden && !isVisible($elem))) {
                     $elem.attr('src', $elem.data('src'));
                     $elem.load(function () {
-                        $(this).data('loaded', true);
+                        $(this).removeData('src').removeAttr('data-src');
 
                         if (options.callbacks.load) {
                             options.callbacks.load($elem);
                         }
                     }).error(function () {
-                        $(this).data('loaded', true);
+                        $(this).removeData('src').removeAttr('data-src');
 
                         if (options.callbacks.error) {
                             options.callbacks.error($elem);

@@ -10,7 +10,12 @@
             AsyncImg.init('img', {
                 events: [
                     {target: window, type: 'scroll'}
-                ]
+                ],
+                callbacks: {
+                    load: function (elem) {
+                        console.log(elem, 'loaded');
+                    }
+                }
             });
         });
     </script>
