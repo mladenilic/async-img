@@ -38,7 +38,6 @@
                 self.bind(options.events[i]);
             }
 
-            self.on();
             self.update();
         },
         update: function (reload) {
@@ -70,14 +69,6 @@
                     });
                 }
             });
-        },
-        on: function () {
-            $window.on('scroll.async-img', function () {
-                self.update();
-            });
-        },
-        off: function () {
-            $window.off('scroll.async-img');
         },
         bind: function (event) {
             $(event.target).on(event.type, function () {
