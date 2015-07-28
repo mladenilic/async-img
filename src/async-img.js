@@ -10,6 +10,7 @@
         callbacks: {},
         events: {}
     };
+
     var isWithinBoundingRect = function ($elem) {
         var rect = $elem[0].getBoundingClientRect();
         return rect.top < $window.height() - options.offset.y &&
@@ -33,7 +34,10 @@
             $.extend(options, params);
             self.selector = selector;
 
-            self.bind(options.events);
+            for (var i = 0; i < options.events.length; i++) {
+                self.bind(options.events[i]);
+            }
+
             self.on();
             self.update();
         },
@@ -75,12 +79,10 @@
         off: function () {
             $window.off('scroll.async-img');
         },
-        bind: function (events) {
-            for (var i = 0; i < events.length; i++) {
-                $(events[i].target).on(events[i].type, function () {
-                    self.update(true);
-                });
-            }
+        bind: function (event) {
+            $(event.target).on(event.type, function () {
+                self.update(true);
+            });
         }
     };
 } (jQuery));
