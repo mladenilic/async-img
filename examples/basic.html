@@ -7,7 +7,7 @@
     <script src="../src/async-img.js"></script>
     <script>
         $(function () {
-            AsyncImg.init('img', {
+            var loader = new AsyncImageLoader('img', {
                 events: [
                     {target: window, type: 'scroll'}
                 ],
