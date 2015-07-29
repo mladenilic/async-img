@@ -1,4 +1,4 @@
-;var AsyncImageLoader = function (selector, params) {
+var AsyncImageLoader = function (selector, params) {
     'use strict';
     var $window = $(window),
         self = this;
@@ -14,9 +14,10 @@
     };
 
     var initialize = function () {
+        var i;
         $.extend(options, params);
         self.selector = selector;
-        for (var i = 0; i < options.events.length; i++) {
+        for (i = 0; i < options.events.length; i++) {
             self.bind(options.events[i]);
         }
 
@@ -29,11 +30,11 @@
                rect.bottom > 0 &&
                rect.left < $window.width() - options.offset.x &&
                rect.right > 0;
-    }
+    };
 
     var isVisible = function ($elem) {
         return !!($elem[0].offsetWidth * $elem[0].offsetHeight);
-    }
+    };
 
     this.update = function () {
         $(self.selector).each(function () {
@@ -60,13 +61,13 @@
                 });
             }
         });
-    }
+    };
 
     this.bind = function (event) {
         $(event.target).on(event.type, function () {
             self.update();
         });
-    }
+    };
 
     initialize();
-}
+};
