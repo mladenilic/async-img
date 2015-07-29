@@ -73,7 +73,7 @@ var AsyncImageLoader = function (selector, params) {
 
     this.bind = function (event) {
         $(event.target).on(event.type, function () {
-            self.update();
+            setTimeout(self.update, event.delay || 0);
         });
     };
 

@@ -16,7 +16,7 @@
             });
 
             var loader = new AsyncImageLoader('.scroll', {
-                bind: [ {target: window, type: 'scroll'} ],
+                bind: [ {target: window, type: 'scroll', delay: 500} ],
                 conditions: {within_bounds: true}
             });
 

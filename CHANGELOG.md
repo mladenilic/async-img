@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Change log file
 - Editor config file
 - Advanced example
+- Event delays
 
 ### Changed
 - Allow multiple instances of image loader to be active
