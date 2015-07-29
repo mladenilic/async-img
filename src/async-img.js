@@ -24,8 +24,6 @@ var AsyncImageLoader = function (selector, params) {
         for (i = 0; i < options.bind.length; i++) {
             self.bind(options.bind[i]);
         }
-
-        self.update();
     };
 
     var isWithinBoundingRect = function ($elem) {
