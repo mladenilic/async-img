@@ -1,5 +1,6 @@
 var AsyncImageLoader = function (selector, params) {
     'use strict';
+
     var $window = $(window),
         self = this;
 
@@ -10,15 +11,15 @@ var AsyncImageLoader = function (selector, params) {
             y: 0
         },
         callbacks: {},
-        events: {}
+        bind: {}
     };
 
     var initialize = function () {
         var i;
         $.extend(options, params);
         self.selector = selector;
-        for (i = 0; i < options.events.length; i++) {
-            self.bind(options.events[i]);
+        for (i = 0; i < options.bind.length; i++) {
+            self.bind(options.bind[i]);
         }
 
         self.update();
