@@ -1,4 +1,5 @@
 ;var AsyncImageLoader = function (selector, params) {
+    'use strict';
     var $window = $(window),
         self = this;
 
@@ -20,7 +21,7 @@
         }
 
         self.update();
-    }
+    };
 
     var isWithinBoundingRect = function ($elem) {
         var rect = $elem[0].getBoundingClientRect();
@@ -36,7 +37,7 @@
 
     this.update = function () {
         $(self.selector).each(function () {
-            $elem = $(this);
+            var $elem = $(this);
 
             if (!$elem.data('src')) {
                 return true;
