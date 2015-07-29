@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Async-Img Example</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="../src/async-img.js"></script>
+    <script>
+        $(function () {
+            new AsyncImageLoader('.hover', {
+                bind: [ {target: '.hover', type: 'mouseover'} ]
+            });
+
+            new AsyncImageLoader('.click', {
+                bind: [ {target: '.click', type: 'click'} ]
+            });
+
+            var loader = new AsyncImageLoader('.scroll', {
+                bind: [ {target: window, type: 'scroll'} ],
+                conditions: {within_bounds: true}
+            });
+
+            loader.update();
+        });
+    </script>
+    <style>
+        *, html {box-sizing: border-box;}
+        body { background-color: #ccc; width: 960px; }
+        header { margin: 1em; text-align: center; }
+        img { width: 50%; padding: 3em; float: left; }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <header>Async-Img Example</header>
+        <section id="content">
+            <img class="hover" src="images/loader.gif" data-src="images/check.png" />
+            <img class="click" src="images/loader.gif" data-src="images/check.png" />
+            <img class="scroll" src="images/loader.gif" data-src="images/check.png" />
+            <img class="scroll" src="images/loader.gif" data-src="images/check.png" />
+            <img class="scroll" src="images/loader.gif" data-src="images/check.png" />
+            <img class="scroll" src="images/loader.gif" data-src="images/check.png" />
+        </section>
+    </div>
+</body>
+</html>
