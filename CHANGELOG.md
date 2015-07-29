@@ -9,3 +9,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Allow multiple instances of image loader to be active
+- Pass loading conditions through options

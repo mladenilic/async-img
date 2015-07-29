@@ -5,13 +5,16 @@ var AsyncImageLoader = function (selector, params) {
         self = this;
 
     var options = {
-        hidden: false,
         offset: {
             x: 0,
             y: 0
         },
         callbacks: {},
-        bind: {}
+        bind: {},
+        conditions: {
+            visible: false,
+            within_bounds: false
+        }
     };
 
     var initialize = function () {
@@ -45,22 +48,28 @@ var AsyncImageLoader = function (selector, params) {
                 return true;
             }
 
-            if (isWithinBoundingRect($elem) || (options.hidden && !isVisible($elem))) {
-                $elem.attr('src', $elem.data('src'));
-                $elem.load(function () {
-                    $(this).removeData('src').removeAttr('data-src');
-
-                    if (options.callbacks.load) {
-                        options.callbacks.load($elem);
-                    }
-                }).error(function () {
-                    $(this).removeData('src').removeAttr('data-src');
-
-                    if (options.callbacks.error) {
-                        options.callbacks.error($elem);
-                    }
-                });
+            if (true === options.conditions.within_bounds && !isWithinBoundingRect($elem)) {
+                return true;
             }
+
+            if (true === options.conditions.visible && !isVisible($elem)) {
+                return true;
+            }
+
+            $elem.attr('src', $elem.data('src'));
+            $elem.load(function () {
+                $(this).removeData('src').removeAttr('data-src');
+
+                if (options.callbacks.load) {
+                    options.callbacks.load($elem);
+                }
+            }).error(function () {
+                $(this).removeData('src').removeAttr('data-src');
+
+                if (options.callbacks.error) {
+                    options.callbacks.error($elem);
+                }
+            });
         });
     };
 
