@@ -1,97 +1,99 @@
-var AsyncImageLoader = function (selector, params) {
-    'use strict';
+var AsyncImageLoader = (function (window, $) {
 
-    var $window = $(window),
-        self = this;
+    return function (selector, params) {
+        'use strict';
 
-    var options = {
-        offset: {
-            x: 0,
-            y: 0
-        },
-        callbacks: {},
-        bind: {},
-        conditions: {
-            visible: false,
-            within_bounds: false
-        },
-        throttle: 300
-    };
+        var $window = $(window),
+            self = this;
 
-    var initialize = function () {
-        var i;
-        $.extend(options, params);
-        self.selector = selector;
-        for (i = 0; i < options.bind.length; i++) {
-            self.bind(options.bind[i]);
-        }
-    };
+        var options = {
+            offset: {
+                x: 0,
+                y: 0
+            },
+            callbacks: {},
+            bind: {},
+            conditions: {
+                visible: false,
+                within_bounds: false
+            },
+            throttle: 300
+        };
 
-    var isWithinBoundingRect = function ($elem) {
-        var rect = $elem[0].getBoundingClientRect();
-        return rect.top < $window.height() - options.offset.y &&
-               rect.bottom > 0 &&
-               rect.left < $window.width() - options.offset.x &&
-               rect.right > 0;
-    };
-
-    var isVisible = function ($elem) {
-        return !!($elem[0].offsetWidth * $elem[0].offsetHeight);
-    };
-
-    var throttle = function (call, threshhold) {
-        var can = true;
-        return function () {
-            if (can) {
-                can = false;
-                call.apply(this, arguments);
-
-                setTimeout(function () {
-                    can = true;
-                }, threshhold || options.throttle);
+        var initialize = function () {
+            var i;
+            $.extend(options, params);
+            self.selector = selector;
+            for (i = 0; i < options.bind.length; i++) {
+                self.bind(options.bind[i]);
             }
         };
-    };
 
-    this.update = function () {
-        $(self.selector).each(function () {
-            console.log('called');
-            var $elem = $(this);
+        var isWithinBoundingRect = function ($elem) {
+            var rect = $elem[0].getBoundingClientRect();
+            return rect.top < $window.height() - options.offset.y &&
+                   rect.bottom > 0 &&
+                   rect.left < $window.width() - options.offset.x &&
+                   rect.right > 0;
+        };
 
-            if (!$elem.data('src')) {
-                return true;
-            }
+        var isVisible = function ($elem) {
+            return !!($elem[0].offsetWidth * $elem[0].offsetHeight);
+        };
 
-            if (true === options.conditions.within_bounds && !isWithinBoundingRect($elem)) {
-                return true;
-            }
+        var throttle = function (call, threshhold) {
+            var can = true;
+            return function () {
+                if (can) {
+                    can = false;
+                    call.apply(this, arguments);
 
-            if (true === options.conditions.visible && !isVisible($elem)) {
-                return true;
-            }
-
-            $elem.attr('src', $elem.data('src'));
-            $elem.load(function () {
-                $(this).removeData('src').removeAttr('data-src');
-
-                if (options.callbacks.load) {
-                    options.callbacks.load($elem);
+                    setTimeout(function () {
+                        can = true;
+                    }, threshhold || options.throttle);
                 }
-            }).error(function () {
-                $(this).removeData('src').removeAttr('data-src');
+            };
+        };
 
-                if (options.callbacks.error) {
-                    options.callbacks.error($elem);
+        this.update = function () {
+            $(self.selector).each(function () {
+                var $elem = $(this);
+
+                if (!$elem.data('src')) {
+                    return true;
                 }
+
+                if (true === options.conditions.within_bounds && !isWithinBoundingRect($elem)) {
+                    return true;
+                }
+
+                if (true === options.conditions.visible && !isVisible($elem)) {
+                    return true;
+                }
+
+                $elem.attr('src', $elem.data('src'));
+                $elem.load(function () {
+                    $(this).removeData('src').removeAttr('data-src');
+
+                    if (options.callbacks.load) {
+                        options.callbacks.load($elem);
+                    }
+                }).error(function () {
+                    $(this).removeData('src').removeAttr('data-src');
+
+                    if (options.callbacks.error) {
+                        options.callbacks.error($elem);
+                    }
+                });
             });
-        });
-    };
+        };
 
-    this.bind = function (event) {
-        $(event.target).on(event.type, throttle(function () {
-            setTimeout(self.update, event.delay || 0);
-        }), event.throttle);
-    };
+        this.bind = function (event) {
+            $(event.target).on(event.type, throttle(function () {
+                setTimeout(self.update, event.delay || 0);
+            }), event.throttle);
+        };
 
-    initialize();
-};
+        initialize();
+    };
+}(window, jQuery));
