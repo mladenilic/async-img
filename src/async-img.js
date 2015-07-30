@@ -14,7 +14,8 @@ var AsyncImageLoader = function (selector, params) {
         conditions: {
             visible: false,
             within_bounds: false
-        }
+        },
+        throttle: 300
     };
 
     var initialize = function () {
@@ -38,8 +39,23 @@ var AsyncImageLoader = function (selector, params) {
         return !!($elem[0].offsetWidth * $elem[0].offsetHeight);
     };
 
+    var throttle = function (call, threshhold) {
+        var can = true;
+        return function () {
+            if (can) {
+                can = false;
+                call.apply(this, arguments);
+
+                setTimeout(function () {
+                    can = true;
+                }, threshhold || options.throttle);
+            }
+        };
+    };
+
     this.update = function () {
         $(self.selector).each(function () {
+            console.log('called');
             var $elem = $(this);
 
             if (!$elem.data('src')) {
@@ -72,9 +88,9 @@ var AsyncImageLoader = function (selector, params) {
     };
 
     this.bind = function (event) {
-        $(event.target).on(event.type, function () {
+        $(event.target).on(event.type, throttle(function () {
             setTimeout(self.update, event.delay || 0);
-        });
+        }), event.throttle);
     };
 
     initialize();
