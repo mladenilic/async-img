@@ -7,7 +7,20 @@
     <script src="../src/async-img.js"></script>
     <script>
         $(function () {
-            AsyncImg.init('img');
+            var loader = new AsyncImageLoader('img', {
+                bind: [
+                    {target: window, type: 'scroll'}
+                ],
+                callbacks: {
+                    load: function (elem) {
+                        console.log(elem, 'loaded');
+                    }
+                },
+                conditions: {
+                    within_bounds: true
+                }
+            });
+        });
     </script>
     <style>
         *, html {box-sizing: border-box;}
@@ -27,6 +40,6 @@
             <img src="images/white.jpg" data-src="images/orange.jpg" />
             <img src="images/red.jpg" data-src="images/black.jpg" />
         </section>
-    </div>   
+    </div>
 </body>
 </html>

@@ -1,86 +1,103 @@
-;var AsyncImg = (function ($) {
-    var $window = $(window), self;
+var AsyncImageLoader = (function (window, $) {
 
-    var options = {
-        hidden: false,
-        offset: {
-            x: 0,
-            y: 0
-        },
-        callbacks: {},
-        events: {}
-    };
-    var isWithinBoundingRect = function ($elem) {
-        var rect = $elem[0].getBoundingClientRect();
-        return rect.top < $window.height() - options.offset.y &&
-               rect.bottom > 0 &&
-               rect.left < $window.width() - options.offset.x &&
-               rect.right > 0; 
-    }
+    return function (selector, params) {
+        'use strict';
 
-    var isVisible = function ($elem) {
-        return !!($elem[0].offsetWidth * $elem[0].offsetHeight);
-    }
-
-    var reloadItems = function () {
-        self.items = $(self.selector);
-    }
-
-    return {
-        init: function (selector, params) {
+        var $window = $(window),
             self = this;
 
+        var options = {
+            offset: {
+                x: 0,
+                y: 0
+            },
+            callbacks: {},
+            bind: {},
+            conditions: {
+                visible: false,
+                within_bounds: false
+            },
+            throttle: 300,
+            event_namespace: '.async-image'
+        };
+
+        var initialize = function () {
+            var i;
             $.extend(options, params);
             self.selector = selector;
-
-            self.bind(options.events);
-            self.on();
-            self.update();
-        },
-        update: function (reload) {
-            if (true === reload || !self.items) {
-                reloadItems();
+            for (i = 0; i < options.bind.length; i++) {
+                self.bind(options.bind[i]);
             }
+        };
 
-            self.items.each(function () {
-                $elem = $(this);
+        var isWithinBoundingRect = function ($elem) {
+            var rect = $elem[0].getBoundingClientRect();
+            return rect.top < $window.height() - options.offset.y &&
+                   rect.bottom > 0 &&
+                   rect.left < $window.width() - options.offset.x &&
+                   rect.right > 0;
+        };
 
-                if (true === $elem.data('loaded') || !$elem.data('src')) {
+        var isVisible = function ($elem) {
+            return !!($elem[0].offsetWidth * $elem[0].offsetHeight);
+        };
+
+        var throttle = function (call, threshhold) {
+            var can = true;
+            return function () {
+                if (can) {
+                    can = false;
+                    call.apply(this, arguments);
+
+                    setTimeout(function () {
+                        can = true;
+                    }, threshhold || options.throttle);
+                }
+            };
+        };
+
+        this.update = function () {
+            $(self.selector).each(function () {
+                var $elem = $(this);
+
+                if (!$elem.data('src')) {
                     return true;
                 }
 
-                if (isWithinBoundingRect($elem) || (options.hidden && !isVisible($elem))) {
-                    $elem.attr('src', $elem.data('src'));
-                    $elem.load(function () {
-                        $(this).data('loaded', true);
-
-                        if (options.callbacks.load) {  
-                            options.callbacks.load($elem);
-                        }
-                    }).error(function () {
-                        $(this).data('loaded', true);
-
-                        if (options.callbacks.error) {
-                            options.callbacks.error($elem);
-                        }
-                    });
+                if (true === options.conditions.within_bounds && !isWithinBoundingRect($elem)) {
+                    return true;
                 }
-            });
-        },
-        on: function () {
-            $window.on('scroll.async-img', function () {
-                self.update();
-            });
-        },
-        off: function () {
-            $window.off('scroll.async-img');
-        },
-        bind: function (events) {
-            for (var i = 0; i < events.length; i++) {
-                $(events[i].target).on(events[i].type, function () {
-                    self.update(true);
+
+                if (true === options.conditions.visible && !isVisible($elem)) {
+                    return true;
+                }
+
+                $elem.attr('src', $elem.data('src'));
+                $elem.off(options.event_namespace);
+
+                $elem.load(function () {
+                    $(this).removeData('src').removeAttr('data-src');
+
+                    if (options.callbacks.load) {
+                        options.callbacks.load($elem);
+                    }
+                }).error(function () {
+                    $(this).removeData('src').removeAttr('data-src');
+
+                    if (options.callbacks.error) {
+                        options.callbacks.error($elem);
+                    }
                 });
-            }
-        }
+            });
+        };
+
+        this.bind = function (event) {
+            $(event.target).on(event.type + options.event_namespace, throttle(function () {
+                console.log('called');
+                setTimeout(self.update, event.delay || 0);
+            }), event.throttle);
+        };
+
+        initialize();
     };
-} (jQuery));
+}(window, jQuery));
