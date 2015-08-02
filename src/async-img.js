@@ -73,6 +73,8 @@ var AsyncImageLoader = (function (window, $) {
                 }
 
                 $elem.attr('src', $elem.data('src'));
+                $elem.off(options.event_namespace);
+
                 $elem.load(function () {
                     $(this).removeData('src').removeAttr('data-src');
 
