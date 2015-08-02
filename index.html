@@ -1,45 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+  <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+  <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <title>Async image loader by mladenilic</title>
-  </head>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="javascripts/async-img.js"></script>
 
-  <body>
+  <title>Async image loader by mladenilic</title>
+</head>
 
-    <header>
-      <div class="container">
-        <h1>Async image loader</h1>
-        <h2>Asynchronous and lazy image loading library.</h2>
+<body>
 
-        <section id="downloads">
-          <a href="https://github.com/mladenilic/async-img/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/mladenilic/async-img/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/mladenilic/async-img" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
-
+  <header>
     <div class="container">
-      <section id="main_content">
-        <h3>
-<a id="how-to" class="anchor" href="#how-to" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to</h3>
+      <h1>Async image loader</h1>
+      <h2>Asynchronous and lazy image loading library.</h2>
 
-<p>After initializing Async image loader will target only image elements with <code>data-src</code> attribute.</p>
-
-<div class="highlight highlight-JavaScript"><pre><span class="pl-k">&lt;</span>img <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>how-to<span class="pl-pds">"</span></span> src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/loader.svg<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/check.png<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
-<span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
-  <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>img.how-to<span class="pl-pds">'</span></span>, {bind<span class="pl-k">:</span> [{target<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>img.how-to<span class="pl-pds">'</span></span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>mouseover<span class="pl-pds">'</span></span>}]});
-<span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
+      <section id="downloads">
+        <a href="https://github.com/mladenilic/async-img/zipball/master" class="btn">Download as .zip</a>
+        <a href="https://github.com/mladenilic/async-img/tarball/master" class="btn">Download as .tar.gz</a>
+        <a href="https://github.com/mladenilic/async-img" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
       </section>
     </div>
+  </header>
 
-    
+  <div class="container">
+    <section id="main_content">
+      <h3>
+        <a id="how-to" class="anchor" href="#how-to" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to</h3>
+
+        <p>After initializing Async image loader will target only image elements with <code>data-src</code> attribute.</p>
+
+        <img class="how-to" src="images/loader.svg" data-src="images/check.png" />
+        <script>
+          new AsyncImageLoader('img.how-to', {bind: [{target: 'img.how-to', type: 'mouseover'}]});
+        </script>
+
+        <div class="highlight highlight-JavaScript"><pre><span class="pl-k">&lt;</span>img src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/loader.gif<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/check.png<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
+<span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
+  <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>img<span class="pl-pds">'</span></span>, {bind<span class="pl-k">:</span> [{target<span class="pl-k">:</span> <span class="pl-c1">window</span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>scroll<span class="pl-pds">'</span></span>}]});
+<span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
+        </section>
+      </div>
+
   </body>
 </html>
