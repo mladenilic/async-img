@@ -79,13 +79,13 @@ var AsyncImageLoader = (function (window, $) {
                     $(this).removeData('src').removeAttr('data-src');
 
                     if (options.callbacks.load) {
-                        options.callbacks.load($elem);
+                        options.callbacks.load.call(this);
                     }
                 }).error(function () {
                     $(this).removeData('src').removeAttr('data-src');
 
                     if (options.callbacks.error) {
-                        options.callbacks.error($elem);
+                        options.callbacks.error.call(this);
                     }
                 });
             });
@@ -93,7 +93,6 @@ var AsyncImageLoader = (function (window, $) {
 
         this.bind = function (event) {
             $(event.target).on(event.type + options.event_namespace, throttle(function () {
-                console.log('called');
                 setTimeout(self.update, event.delay || 0);
             }), event.throttle);
         };
