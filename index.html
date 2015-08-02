@@ -9,7 +9,7 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="https://raw.githubusercontent.com/mladenilic/async-img/develop/src/async-img.js"></script>
+  <script src="javascripts/async-img.js"></script>
 
   <title>Async image loader by mladenilic</title>
 </head>
@@ -36,10 +36,15 @@
 
         <p>After initializing Async image loader will target only image elements with <code>data-src</code> attribute.</p>
 
-        <div class="highlight highlight-JavaScript"><pre><span class="pl-k">&lt;</span>img src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/placeholder.gif<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>checkpng<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
-          <span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
-          <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>img<span class="pl-pds">'</span></span>, {bind<span class="pl-k">:</span> [{target<span class="pl-k">:</span> <span class="pl-c1">window</span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>scroll<span class="pl-pds">'</span></span>}]});
-          <span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
+        <img class="how-to" src="images/loader.svg" data-src="images/check.png" />
+        <script>
+          new AsyncImageLoader('img.how-to', {bind: [{target: 'img.how-to', type: 'mouseover'}]});
+        </script>
+
+        <div class="highlight highlight-JavaScript"><pre><span class="pl-k">&lt;</span>img src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/loader.gif<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/check.png<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
+<span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
+  <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>img<span class="pl-pds">'</span></span>, {bind<span class="pl-k">:</span> [{target<span class="pl-k">:</span> <span class="pl-c1">window</span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>scroll<span class="pl-pds">'</span></span>}]});
+<span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
         </section>
       </div>
 

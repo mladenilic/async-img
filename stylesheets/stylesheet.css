@@ -245,3 +245,9 @@ a {
 .cf {
   zoom:1;
 }
+
+img.how-to {
+  display: block;
+  margin: auto;
+  width: 100px;
+}
