@@ -17,7 +17,8 @@ var AsyncImageLoader = (function (window, $) {
                 visible: false,
                 within_bounds: false
             },
-            throttle: 300
+            throttle: 300,
+            event_namespace: '.async-image'
         };
 
         var initialize = function () {
@@ -89,7 +90,8 @@ var AsyncImageLoader = (function (window, $) {
         };
 
         this.bind = function (event) {
-            $(event.target).on(event.type, throttle(function () {
+            $(event.target).on(event.type + options.event_namespace, throttle(function () {
+                console.log('called');
                 setTimeout(self.update, event.delay || 0);
             }), event.throttle);
         };
