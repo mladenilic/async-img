@@ -41,7 +41,7 @@
 
       <div class="highlight highlight-javascript"><pre><span class="pl-k">&lt;</span>img <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>how-to<span class="pl-pds">"</span></span> src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/loader.svg<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/check.png<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
 <span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
-  <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>img.how-to<span class="pl-pds">'</span></span>, {bind<span class="pl-k">:</span> [{target<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>img.how-to<span class="pl-pds">'</span></span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>mouseover<span class="pl-pds">'</span></span>}]});<span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span>
+  <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>.how-to<span class="pl-pds">'</span></span>, {bind<span class="pl-k">:</span> [{target<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.how-to<span class="pl-pds">'</span></span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>mouseover<span class="pl-pds">'</span></span>}]});
 <span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
 
       <h3>Lazy load</h3>
@@ -60,8 +60,8 @@
       <div class="highlight highlight-javascript"><pre><span class="pl-k">&lt;</span>img <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>lazy-load<span class="pl-pds">"</span></span> src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/loader.svg<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/check.png<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
 <span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
   <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>img.lazy-load<span class="pl-pds">'</span></span>, {
-            bind<span class="pl-k">:</span> [ { target<span class="pl-k">:</span> <span class="pl-c1">window</span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>scroll<span class="pl-pds">'</span></span>, delay<span class="pl-k">:</span> <span class="pl-c1">500</span> } ],
-            conditions<span class="pl-k">:</span> { within_bounds<span class="pl-k">:</span> <span class="pl-c1">true</span> }
+    bind<span class="pl-k">:</span> [ { target<span class="pl-k">:</span> <span class="pl-c1">window</span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>scroll<span class="pl-pds">'</span></span>, delay<span class="pl-k">:</span> <span class="pl-c1">500</span> } ],
+    conditions<span class="pl-k">:</span> { within_bounds<span class="pl-k">:</span> <span class="pl-c1">true</span> }
   });
 <span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
 
