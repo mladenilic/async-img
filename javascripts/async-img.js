@@ -17,7 +17,8 @@ var AsyncImageLoader = (function (window, $) {
                 visible: false,
                 within_bounds: false
             },
-            throttle: 300
+            throttle: 300,
+            event_namespace: '.async-image'
         };
 
         var initialize = function () {
@@ -72,24 +73,26 @@ var AsyncImageLoader = (function (window, $) {
                 }
 
                 $elem.attr('src', $elem.data('src'));
+                $elem.off(options.event_namespace);
+
                 $elem.load(function () {
                     $(this).removeData('src').removeAttr('data-src');
 
                     if (options.callbacks.load) {
-                        options.callbacks.load($elem);
+                        options.callbacks.load.call(this);
                     }
                 }).error(function () {
                     $(this).removeData('src').removeAttr('data-src');
 
                     if (options.callbacks.error) {
-                        options.callbacks.error($elem);
+                        options.callbacks.error.call(this);
                     }
                 });
             });
         };
 
         this.bind = function (event) {
-            $(event.target).on(event.type, throttle(function () {
+            $(event.target).on(event.type + options.event_namespace, throttle(function () {
                 setTimeout(self.update, event.delay || 0);
             }), event.throttle);
         };
