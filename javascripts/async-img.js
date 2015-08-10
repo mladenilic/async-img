@@ -12,7 +12,7 @@ var AsyncImageLoader = (function (window, $) {
                 y: 0
             },
             callbacks: {},
-            bind: {},
+            binds: {},
             conditions: {
                 visible: false,
                 within_bounds: false
@@ -25,8 +25,8 @@ var AsyncImageLoader = (function (window, $) {
             var i;
             $.extend(options, params);
             self.selector = selector;
-            for (i = 0; i < options.bind.length; i++) {
-                self.bind(options.bind[i]);
+            for (i = 0; i < options.binds.length; i++) {
+                self.bind(options.binds[i]);
             }
         };
 

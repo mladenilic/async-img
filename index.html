@@ -43,14 +43,14 @@
         <div class="example">
             <img class="basic" src="images/loader.svg" data-src="images/check.png" />
             <script>
-                new AsyncImageLoader('.basic', {bind: [{target: '.basic', type: 'mouseover'}]});
+                new AsyncImageLoader('.basic', {binds: [{target: '.basic', type: 'mouseover'}]});
             </script>
         </div>
 
       <div class="highlight highlight-javascript"><pre><span class="pl-k">&lt;</span>img <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>basic<span class="pl-pds">"</span></span> src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/loader.svg<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/check.png<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
 <span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
   <span class="pl-k">  new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>.basic<span class="pl-pds">'</span></span>, {
-        bind<span class="pl-k">:</span> [{target<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.basic<span class="pl-pds">'</span></span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>mouseover<span class="pl-pds">'</span></span>}]
+        binds<span class="pl-k">:</span> [{target<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.basic<span class="pl-pds">'</span></span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>mouseover<span class="pl-pds">'</span></span>}]
     });
 <span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
 
@@ -95,40 +95,26 @@
             <li><code>event_namespace</code> - namespace used to register events (default: <code>'.async-image'</code>)</li>
         </ul>
 
-                    <div>
+        <h2>Lazy load</h2>
+        <p>Async Image Loader can be configured to lazy load images after they enter viewport.</p>
 
-                        <pre>img class="callback border" data-src="images/check.png" /&gt;
-                            script&gt;
-                            new AsyncImageLoader('img.callback', {
-                            bind: [{target: 'img.callback', type: 'mouseover'}],
-                            callbacks: {
-                            load: function () {
-                            $(this).removeClass('border');
-                        }
-                    }
-                });
-                /script&gt;</pre>
+        <div class="example">
+          <img class="lazy-load" src="images/loader.svg" data-src="images/check.png" />
+          <script>
+              new AsyncImageLoader('img.lazy-load', {
+                  binds: [ { target: window, type: 'scroll', delay: 1500 } ],
+                  conditions: { within_bounds: true }
+              });
+          </script>
+        </div>
 
-            </div>
-
-            <h2>
-                <a id="lazy-load" class="anchor" href="#lazy-load" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lazy load</h2>
-
-                <p>Async image loader can be configured to load images only after they enter viewport.</p>
-
-                <div>![](images/loader.svg)</div>
-
-                <div>
-
-                    <pre>img class="lazy-load" src="images/loader.svg" data-src="images/check.png" /&gt;
-                        script&gt;
-                        new AsyncImageLoader('img.lazy-load', {
-                        bind: [ { target: window, type: 'scroll', delay: 500 } ],
-                        conditions: { within_bounds: true }
-                    });
-                    /script&gt;</pre>
-
-                </div>
+        <div class="highlight highlight-javascript"><pre><span class="pl-k">&lt;</span>img <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>lazy-load<span class="pl-pds">"</span></span> src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/loader.svg<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/check.png<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
+<span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
+    <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>img.lazy-load<span class="pl-pds">'</span></span>, {
+        binds<span class="pl-k">:</span> [ { target<span class="pl-k">:</span> <span class="pl-c1">window</span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>scroll<span class="pl-pds">'</span></span>, delay<span class="pl-k">:</span> <span class="pl-c1">1500</span> } ],
+        conditions<span class="pl-k">:</span> { within_bounds<span class="pl-k">:</span> <span class="pl-c1">true</span> }
+    });
+<span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
             </section>
         </div>
 
