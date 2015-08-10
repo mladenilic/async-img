@@ -72,6 +72,10 @@ var AsyncImageLoader = (function (window, $) {
                     return true;
                 }
 
+                if (options.conditions.custom && !options.conditions.custom.call(this)) {
+                    return true;
+                }
+
                 $elem.attr('src', $elem.data('src'));
                 $elem.off(options.event_namespace);
 

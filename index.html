@@ -95,6 +95,28 @@
             <li><code>event_namespace</code> - namespace used to register events (default: <code>'.async-image'</code>)</li>
         </ul>
 
+        <h2>Methods</h2>
+<div class="highlight highlight-JavaScript"><pre><span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
+    <span class="pl-k">var</span> loader <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>.example<span class="pl-pds">'</span></span>);
+
+    <span class="pl-c">// Bind additional events to triget image loadin</span>
+    loader.bind({target<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.button<span class="pl-pds">'</span></span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>click<span class="pl-pds">'</span></span>, delay<span class="pl-k">:</span> <span class="pl-c1">250</span>});
+
+    <span class="pl-c">// Manually trigger image loading</span>
+    loader.update();
+
+    <span class="pl-c">// Dynamically register callbacks</span>
+    loader.<span class="pl-c1">onLoad</span>(<span class="pl-k">function</span> () {
+      <span class="pl-en">console</span><span class="pl-c1">.log</span>($(<span class="pl-v">this</span>).attr(<span class="pl-s"><span class="pl-pds">'</span>src<span class="pl-pds">'</span></span>), <span class="pl-s"><span class="pl-pds">'</span>Loaded<span class="pl-pds">'</span></span>);
+    });
+
+    loader.<span class="pl-c1">onError</span>(<span class="pl-k">function</span> () {
+      <span class="pl-en">console</span><span class="pl-c1">.log</span>($(<span class="pl-v">this</span>).attr(<span class="pl-s"><span class="pl-pds">'</span>src<span class="pl-pds">'</span></span>), <span class="pl-s"><span class="pl-pds">'</span>could not be loaded<span class="pl-pds">'</span></span>);
+    });
+<span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
+
+
+
         <h2>Lazy load</h2>
         <p>Async Image Loader can be configured to lazy load images after they enter viewport.</p>
 
@@ -121,7 +143,7 @@
         <!-- FOOTER  -->
         <div id="footer_wrap" class="outer">
           <footer class="inner">
-            <p class="copyright">Async image loader maintained by <a href="https://github.com/mladenilic">mladenilic</a></p>
+            <p class="copyright">Async image loader created by <a href="https://github.com/mladenilic">Mladen Ilic</a></p>
             <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
         </footer>
     </div>
