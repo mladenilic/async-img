@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2015-08-11
+### Added
+- Travis yml file
+- Custom condition callback
+- Readme file
+
+### Changed
+- Allow setting callbacks after initialization
+
+### Removed
+- Example pages
+
 ## [1.0.0] - 2015-08-03
 ### Added
 - Change log file

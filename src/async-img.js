@@ -12,7 +12,7 @@ var AsyncImageLoader = (function (window, $) {
                 y: 0
             },
             callbacks: {},
-            bind: {},
+            binds: {},
             conditions: {
                 visible: false,
                 within_bounds: false
@@ -25,8 +25,8 @@ var AsyncImageLoader = (function (window, $) {
             var i;
             $.extend(options, params);
             self.selector = selector;
-            for (i = 0; i < options.bind.length; i++) {
-                self.bind(options.bind[i]);
+            for (i = 0; i < options.binds.length; i++) {
+                self.bind(options.binds[i]);
             }
         };
 
@@ -72,6 +72,10 @@ var AsyncImageLoader = (function (window, $) {
                     return true;
                 }
 
+                if (options.conditions.custom && !options.conditions.custom.call(this)) {
+                    return true;
+                }
+
                 $elem.attr('src', $elem.data('src'));
                 $elem.off(options.event_namespace);
 
@@ -79,13 +83,13 @@ var AsyncImageLoader = (function (window, $) {
                     $(this).removeData('src').removeAttr('data-src');
 
                     if (options.callbacks.load) {
-                        options.callbacks.load($elem);
+                        options.callbacks.load.call(this);
                     }
                 }).error(function () {
                     $(this).removeData('src').removeAttr('data-src');
 
                     if (options.callbacks.error) {
-                        options.callbacks.error($elem);
+                        options.callbacks.error.call(this);
                     }
                 });
             });
@@ -93,9 +97,16 @@ var AsyncImageLoader = (function (window, $) {
 
         this.bind = function (event) {
             $(event.target).on(event.type + options.event_namespace, throttle(function () {
-                console.log('called');
                 setTimeout(self.update, event.delay || 0);
             }), event.throttle);
+        };
+
+        this.onLoad = function (callback) {
+            options.callbacks.load = callback;
+        };
+
+        this.onError = function (callback) {
+            options.callbacks.error = callback;
         };
 
         initialize();
