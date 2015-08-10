@@ -101,6 +101,14 @@ var AsyncImageLoader = (function (window, $) {
             }), event.throttle);
         };
 
+        this.onLoad = function (callback) {
+            options.callbacks.load = callback;
+        };
+
+        this.onError = function (callback) {
+            options.callbacks.error = callback;
+        };
+
         initialize();
     };
 }(window, jQuery));
