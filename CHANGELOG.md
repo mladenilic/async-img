@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 ### Added
 - Travis yml file
+- Custom condition callback
 
 ### Removed
 - Example pages
