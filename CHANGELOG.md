@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Travis yml file
 - Custom condition callback
 
+### Changed
+- Allow setting callbacks after initialization
+
 ### Removed
 - Example pages
 
