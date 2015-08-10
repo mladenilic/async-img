@@ -54,15 +54,14 @@
     });
 <span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
 
-        <h2>Config</h2>
-
+        <h2>Options</h2>
         <ul>
             <li>
                 <code>binds</code> - array of events which will trigger images to load
                 <p>Event is passed as object with following members:</p>
                 <ul>
                     <li><code>type</code> - string</li>
-                    <li><code>target</code> - jQuery selector</li>
+                    <li><code>target</code> - any valid jQuery selector</li>
                     <li><code>delay</code> - number of miliseconds event wil be delayed (dafault: <code>0</code>)</li>
                     <li><code>throttle</code> - fire maximum of one event per x miliseconds (dafault: <code>300</code>)</li>
                 </ul>
@@ -87,8 +86,8 @@
             <li>
                 <code>offset</code> - adds offsets when calculating if image element is in viewport
                 <ul>
-                    <li><code>s</code> - horizontal offset (dafault: <code>0</code>)</li>
-                    <li><code>s</code> - vertical offset (dafault: <code>0</code>)</li>
+                    <li><code>x</code> - horizontal offset (dafault: <code>0</code>)</li>
+                    <li><code>y</code> - vertical offset (dafault: <code>0</code>)</li>
                 </ul>
             </li>
             <li><code>throttle</code> - default throttle value for all events (default: <code>300</code>)</li>
