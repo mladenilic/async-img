@@ -39,7 +39,7 @@ var AsyncImageLoader = (function (window, $) {
         };
 
         var isVisible = function ($elem) {
-            return !!($elem[0].offsetWidth * $elem[0].offsetHeight);
+            return 0 !== $elem[0].offsetWidth * $elem[0].offsetHeight;
         };
 
         var throttle = function (call, threshhold) {
