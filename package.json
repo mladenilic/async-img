@@ -1,0 +1,29 @@
+{
+    "name": "async-img",
+    "version": "1.1.0",
+    "title": "Async Img",
+    "description": "Asynchronous and lazy image loading library",
+    "author": {
+        "name": "Mladen Ilic"
+    },
+    "dependencies": {
+        "jquery": "~1.7.2"
+    },
+    "devDependencies": {
+        "grunt": "^0.4.5",
+        "grunt-contrib-jshint": "^0.10.0",
+        "grunt-contrib-uglify": "^0.5.0",
+        "grunt-contrib-watch": "^0.6.1"
+    },
+    "keywords": [
+        "asynchronous",
+        "image",
+        "loader"
+    ],
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/mladenilic/async-img"
+    },
+    "homepage": "https://github.com/mladenilic/async-img",
+    "license": "MIT"
+}
