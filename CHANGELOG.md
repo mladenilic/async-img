@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Gitignore file
 - Package json file
 - Grunt file
+- Minified script
 
 ## [1.1.0] - 2015-08-11
 ### Added
