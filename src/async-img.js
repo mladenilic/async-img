@@ -1,8 +1,7 @@
-var AsyncImageLoader = (function (window, $) {
+var AsyncImage = (function (window, $) {
+    'use strict';
 
-    return function (selector, params) {
-        'use strict';
-
+    var Loader = function (selector, params) {
         var $window = $(window),
             self = this;
 
@@ -39,7 +38,7 @@ var AsyncImageLoader = (function (window, $) {
         };
 
         var isVisible = function ($elem) {
-            return !!($elem[0].offsetWidth * $elem[0].offsetHeight);
+            return 0 !== $elem[0].offsetWidth * $elem[0].offsetHeight;
         };
 
         var throttle = function (call, threshhold) {
@@ -98,7 +97,7 @@ var AsyncImageLoader = (function (window, $) {
         this.bind = function (event) {
             $(event.target).on(event.type + options.event_namespace, throttle(function () {
                 setTimeout(self.update, event.delay || 0);
-            }), event.throttle);
+            }, event.throttle));
         };
 
         this.onLoad = function (callback) {
@@ -110,5 +109,17 @@ var AsyncImageLoader = (function (window, $) {
         };
 
         initialize();
+    };
+
+    return {
+        new: function (selector, params) {
+            return new Loader(selector, params);
+        },
+        lazy: function (selector) {
+            return new Loader(selector, {
+                binds: [ { target: window, type: 'scroll' } ],
+                conditions: { within_bounds: true },
+            });
+        }
     };
 }(window, jQuery));
