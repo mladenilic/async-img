@@ -97,7 +97,7 @@ var AsyncImage = (function (window, $) {
         this.bind = function (event) {
             $(event.target).on(event.type + options.event_namespace, throttle(function () {
                 setTimeout(self.update, event.delay || 0);
-            }), event.throttle);
+            }, event.throttle));
         };
 
         this.onLoad = function (callback) {
