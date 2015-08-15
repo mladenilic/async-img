@@ -5,18 +5,18 @@ Asynchronous and lazy image loading library
 
 [http://mladenilic.github.io/async-img/](http://mladenilic.github.io/async-img/)
 
-### Options
+### Initializing Asynchronous Loader
 
 ```JavaScript
- new AsyncImageLoader(<selector>, <options>);
+AsyncImage.new(<selector>, <options>);
 ```
 
-* `selector` - any valid jQuery selector
+* `selector` - image elements which will be asynchronous laoded (valid jQuery selector)
 * `options`
     * `binds` - array of events on which images will be loaded
-        * `type` - jQuery event type
-        * `target` - any valid jQuery selector
-        * `delay` - number of miliseconds event wil be delayed (dafault: `0`)
+        * `type` - string (`click`, `mouseover`)
+        * `target` - event target (valid jQuery selector)
+        * `delay` - number of miliseconds event will be delayed (dafault: `0`)
         * `throttle` - fire maximum of one event per x miliseconds (dafault: `300`)
     * `conditions` - object specifying conditions under which images will be loaded
         * `visible` - load image only if element is not hidden (default: `false`)
@@ -31,11 +31,19 @@ Asynchronous and lazy image loading library
     * `throttle` - default throttle value for all events (default: `300`)
     * `event_namespace` - namespace used to register events (default: `'.async-img'`)
 
+### Initializing Lazy Loader
+
+```JavaScript
+AsyncImage.lazy(<selector>);
+```
+
+* `selector` - image elements which will be lazy laoded (valid jQuery selector)
+
 ### Methods
 
 ```JavaScript
 <script>
-    var loader = new AsyncImageLoader('.example');
+    var loader = AsyncImage.new('.example');
 
     // Bind additional events to triget image loadin
     loader.bind({target: '.button', type: 'click', delay: 250});
