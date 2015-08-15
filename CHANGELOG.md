@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Package json file
 - Grunt file
 - Minified script
+- Factory method
 
 ## [1.1.0] - 2015-08-11
 ### Added

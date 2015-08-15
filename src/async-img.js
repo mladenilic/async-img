@@ -1,8 +1,7 @@
-var AsyncImageLoader = (function (window, $) {
+var AsyncImage = (function (window, $) {
+    'use strict';
 
-    return function (selector, params) {
-        'use strict';
-
+    var Loader = function (selector, params) {
         var $window = $(window),
             self = this;
 
@@ -110,5 +109,11 @@ var AsyncImageLoader = (function (window, $) {
         };
 
         initialize();
+    };
+
+    return {
+        new: function (selector, params) {
+            return new Loader(selector, params);
+        }
     };
 }(window, jQuery));
