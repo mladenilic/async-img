@@ -1,6 +1,7 @@
-# Async Image Loader
+# Async Img
 Asynchronous and lazy image loading library
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ### Demo
 
 [http://mladenilic.github.io/async-img/](http://mladenilic.github.io/async-img/)
