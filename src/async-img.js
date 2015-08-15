@@ -115,11 +115,10 @@ var AsyncImage = (function (window, $) {
         new: function (selector, params) {
             return new Loader(selector, params);
         },
-        lazy: function (selector, xOffset, yOffset, delay, throttle) {
+        lazy: function (selector) {
             return new Loader(selector, {
-                binds: [ { target: window, type: 'scroll', delay: delay || 0, throttle: throttle } ],
+                binds: [ { target: window, type: 'scroll' } ],
                 conditions: { within_bounds: true },
-                offset: { x: xOffset || 0, y: yOffset || 0 }
             });
         }
     };
