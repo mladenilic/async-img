@@ -2,3 +2,7 @@
 	display: block;
 	margin: 1em auto;
 }
+
+.hljs  {
+	padding: 0;
+}

@@ -4,24 +4,27 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Async image loader : Asynchronous and lazy image loading library.">
+    <meta name="description" content="Async Img : Asynchronous and lazy image loading library.">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/github.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/custom.css">
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
     <script src="javascripts/async-img.js"></script>
-    <title>Async image loader</title>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <title>Async Img</title>
 </head>
 
 <body>
-
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/mladenilic/async-img">View on GitHub</a>
 
-          <h1 id="project_title">Async image loader</h1>
+          <h1 id="project_title">Async Img</h1>
           <h2 id="project_tagline">Asynchronous and lazy image loading library</h2>
 
           <section id="downloads">
@@ -34,118 +37,146 @@
   <!-- MAIN CONTENT -->
   <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h2>How to</h2>
-        <p>Every instance of <i>Async Image Loader</i> independently attempts to load images based on passed options. Image elements without <code>data-src</code> attribute will be ignored.</p>
+        <h2>About</h2>
+        <p>
+            Flexible yet simple. Built to seemingly integrate within any project. With wide range of options it can be configured to fit any need.
+        </p>
 
         <h2>Basic example</h2>
-        <p>Hover image to load it</p>
+        <p>Hover image to load it.</p>
 
         <div class="example">
             <img class="basic" src="images/loader.svg" data-src="images/check.png" />
             <script>
-                new AsyncImageLoader('.basic', {binds: [{target: '.basic', type: 'mouseover'}]});
+                AsyncImage.new('.basic', {binds: [{target: '.basic', type: 'mouseover'}]});
             </script>
         </div>
 
-      <div class="highlight highlight-javascript"><pre><span class="pl-k">&lt;</span>img <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>basic<span class="pl-pds">"</span></span> src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/loader.svg<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/check.png<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
-<span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
-  <span class="pl-k">  new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>.basic<span class="pl-pds">'</span></span>, {
-        binds<span class="pl-k">:</span> [{target<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.basic<span class="pl-pds">'</span></span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>mouseover<span class="pl-pds">'</span></span>}]
-    });
-<span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
+<pre><code class="html"><img class="basic" src="images/loader.svg" data-src="images/check.png" />
+&lt;script&gt;
+    AsyncImage.new('.basic', {binds: [{target: '.basic', type: 'mouseover'}]});
+&lt;/script&gt;
+</code></pre>
 
-        <h2>Options</h2>
+        <h2>Initializing Asynchronous Loader</h2>
+        <pre><code class="js">AsyncImage.new('&lt;selector&gt;', '&lt;options&gt;');</code></pre>
+
         <ul>
+            <li><code>selector</code> - image elements which will be asynchronous laoded (valid jQuery selector)</li>
             <li>
-                <code>binds</code> - array of events which will trigger images to load
-                <p>Event is passed as object with following members:</p>
-                <ul>
-                    <li><code>type</code> - string</li>
-                    <li><code>target</code> - any valid jQuery selector</li>
-                    <li><code>delay</code> - number of miliseconds event wil be delayed (dafault: <code>0</code>)</li>
-                    <li><code>throttle</code> - fire maximum of one event per x miliseconds (dafault: <code>300</code>)</li>
-                </ul>
-            </li>
+                <code>options</code>
 
-            <li>
-                <code>conditions</code> - object specifying conditions under which images will be loaded
                 <ul>
-                    <li><code>visible</code> - load image only if element is not hidden (default: <code>false</code>)</li>
-                    <li><code>within_bounds</code> - load image only if element is within viewport (default: <code>false</code>)</li>
-                    <li><code>custom</code> - callback with user defined function that returns boolean value</li>
-                </ul>
-            </li>
+                    <li>
+                        <code>binds</code> - array of events on which images will be loaded
 
-            <li>
-                <code>callbacks</code> - object with user defined callbacks
-                <ul>
-                    <li><code>load</code> - called on image load</li>
-                    <li><code>error</code> - called when loading image fails</li>
+                        <ul>
+                            <li><code>type</code> - string (<code>click</code>, <code>mouseover</code>)</li>
+                            <li><code>target</code> - event target (valid jQuery selector)</li>
+                            <li><code>delay</code> - number of miliseconds event will be delayed (dafault: <code>0</code>)</li>
+                            <li><code>throttle</code> - fire maximum of one event per x miliseconds (dafault: <code>300</code>)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <code>conditions</code> - object specifying conditions under which images will be loaded
+
+                        <ul>
+                            <li><code>visible</code> - load image only if element is not hidden (default: <code>false</code>)</li>
+                            <li><code>within_bounds</code> - load image only if element is within viewport (default: <code>false</code>)</li>
+                            <li><code>custom</code> - callback with user defined function that returns boolean value</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <code>callbacks</code> - object with user defined callbacks
+
+                        <ul>
+                            <li><code>load</code> - called on image load</li>
+                            <li><code>error</code> - called when loading image fails</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <code>offset</code> - adds offsets when calculating if image element is in viewport
+                        <ul>
+                            <li><code>x</code> - horizontal offset (dafault: <code>0</code>)</li>
+                            <li><code>y</code> - vertical offset (dafault: <code>0</code>)</li>
+                        </ul>
+                    </li>
+                    <li><code>throttle</code> - default throttle value for all events (default: <code>300</code>)</li>
+                    <li><code>event_namespace</code> - namespace used to register events (default: <code>'.async-img'</code>)</li>
                 </ul>
             </li>
-            <li>
-                <code>offset</code> - adds offsets when calculating if image element is in viewport
-                <ul>
-                    <li><code>x</code> - horizontal offset (dafault: <code>0</code>)</li>
-                    <li><code>y</code> - vertical offset (dafault: <code>0</code>)</li>
-                </ul>
-            </li>
-            <li><code>throttle</code> - default throttle value for all events (default: <code>300</code>)</li>
-            <li><code>event_namespace</code> - namespace used to register events (default: <code>'.async-image'</code>)</li>
+        </ul>
+
+        <h2>Initializing Lazy Loader</h2>
+        <pre><code class="js">AsyncImage.lazy('&lt;selector&gt;');</code></pre>
+
+        <ul>
+            <li><code>selector</code> - image elements which will be lazy laoded (valid jQuery selector)</li>
         </ul>
 
         <h2>Methods</h2>
-<div class="highlight highlight-JavaScript"><pre><span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
-    <span class="pl-k">var</span> loader <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>.example<span class="pl-pds">'</span></span>);
+<pre><code class="js">    var loader = new AsyncImage.new('.example');
 
-    <span class="pl-c">// Bind additional events to triget image loadin</span>
-    loader.bind({target<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.button<span class="pl-pds">'</span></span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>click<span class="pl-pds">'</span></span>, delay<span class="pl-k">:</span> <span class="pl-c1">250</span>});
+    // Bind additional events to triget image loadin
+    loader.bind({target: '.button', type: 'click', delay: 250});
 
-    <span class="pl-c">// Manually trigger image loading</span>
+    // Manually trigger image loading
     loader.update();
 
-    <span class="pl-c">// Dynamically register callbacks</span>
-    loader.<span class="pl-c1">onLoad</span>(<span class="pl-k">function</span> () {
-      <span class="pl-en">console</span><span class="pl-c1">.log</span>($(<span class="pl-v">this</span>).attr(<span class="pl-s"><span class="pl-pds">'</span>src<span class="pl-pds">'</span></span>), <span class="pl-s"><span class="pl-pds">'</span>Loaded<span class="pl-pds">'</span></span>);
+    // Dynamically register callbacks
+    loader.onLoad(function () {
+      console.log($(this).attr('src'), 'Loaded');
     });
 
-    loader.<span class="pl-c1">onError</span>(<span class="pl-k">function</span> () {
-      <span class="pl-en">console</span><span class="pl-c1">.log</span>($(<span class="pl-v">this</span>).attr(<span class="pl-s"><span class="pl-pds">'</span>src<span class="pl-pds">'</span></span>), <span class="pl-s"><span class="pl-pds">'</span>could not be loaded<span class="pl-pds">'</span></span>);
+    loader.onError(function () {
+      console.log($(this).attr('src'), 'could not be loaded');
     });
-<span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
+</code></pre>
 
-
-
-        <h2>Lazy load</h2>
-        <p>Async Image Loader can be configured to lazy load images after they enter viewport.</p>
+        <h2 class="test">Lazy load Example</h2>
+        <p>Image is loaded after it enters viewport.</p>
 
         <div class="example">
           <img class="lazy-load" src="images/loader.svg" data-src="images/check.png" />
           <script>
-              new AsyncImageLoader('img.lazy-load', {
-                  binds: [ { target: window, type: 'scroll', delay: 1500 } ],
-                  conditions: { within_bounds: true }
-              });
+              AsyncImage.lazy('img.lazy-load');
           </script>
         </div>
 
-        <div class="highlight highlight-javascript"><pre><span class="pl-k">&lt;</span>img <span class="pl-k">class</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>lazy-load<span class="pl-pds">"</span></span> src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/loader.svg<span class="pl-pds">"</span></span> data<span class="pl-k">-</span>src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>images/check.png<span class="pl-pds">"</span></span> /<span class="pl-k">&gt;</span>
-<span class="pl-k">&lt;</span>script<span class="pl-k">&gt;</span>
-    <span class="pl-k">new</span> <span class="pl-en">AsyncImageLoader</span>(<span class="pl-s"><span class="pl-pds">'</span>img.lazy-load<span class="pl-pds">'</span></span>, {
-        binds<span class="pl-k">:</span> [ { target<span class="pl-k">:</span> <span class="pl-c1">window</span>, type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>scroll<span class="pl-pds">'</span></span>, delay<span class="pl-k">:</span> <span class="pl-c1">1500</span> } ],
-        conditions<span class="pl-k">:</span> { within_bounds<span class="pl-k">:</span> <span class="pl-c1">true</span> }
-    });
-<span class="pl-k">&lt;</span>/script<span class="pl-k">&gt;</span></pre></div>
-            </section>
-        </div>
+<pre><code class="html"><img class="lazy-load" src="images/loader.svg" data-src="images/check.png" />
+&lt;script&gt;
+  AsyncImage.lazy('img.lazy-load');
+&lt;/script&gt;
+</code></pre>
 
-        <!-- FOOTER  -->
-        <div id="footer_wrap" class="outer">
-          <footer class="inner">
-            <p class="copyright">Async image loader created by <a href="https://github.com/mladenilic">Mladen Ilic</a></p>
+        <p>Or, if you need more flexibility, initialize <i>Async Image</i> to lazy load image.</p>
+
+<pre><code class="html"><img class="lazy-load" src="images/loader.svg" data-src="images/check.png" />
+&lt;script&gt;
+    AsyncImage.new('img.lazy-load', {
+        binds: [ { target: window, type: 'scroll'} ],
+        conditions: { within_bounds: true }
+    });
+&lt;/script&gt;
+</code></pre>
+
+        </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+        <footer class="inner">
+            <p class="copyright">Async image created by <a href="https://github.com/mladenilic">Mladen Ilic</a></p>
             <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
         </footer>
     </div>
 
+    <script>
+        (function () {
+          $('pre code').each(function () {
+            $(this).html($(this).html().replace(/</g, '&lt;').replace(/>/g, '&gt;'));
+          });
+        })();
+    </script>
 </body>
 </html>
